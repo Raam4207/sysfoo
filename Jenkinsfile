@@ -1,7 +1,7 @@
 pipeline{
     agent { label 'slave-2' }
     tools{
-        maven 'Maven 3.8.6'
+        maven 'Maven'
     }
     stages{
         stage('Compile'){
