@@ -18,11 +18,13 @@ pipeline{
             steps{
                 sh 'mvn package -DskipTests'
             }
-            post{
-                 always {
-                      echo "This block always runs."
-                 }
-                }
+        stage ('Deploy') {
+          steps {
+            script {
+              deploy adapters: [tomcat10(credentialsId: 'tomcat_credential', path: '', url: 'http://3.110.48.199:8080')], contextPath: '/pipeline', onFailure: false, war: 'target/*.war' 
+            }
+          }
+        } 
         }
     }
 }
