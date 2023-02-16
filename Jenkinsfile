@@ -21,9 +21,7 @@ pipeline{
         }
         stage ('Deploy') {
           steps {
-            script {
-              deploy adapters: [tomcat10(credentialsId: 'tomcat_credential', path: '', url: 'http://3.110.48.199:8080')], contextPath: '/pipeline', onFailure: false, war: 'target/*.war' 
-            }
+             sh "curl -v -u admin:123 -T /var/lib/jenkins/workspace/sys/target/*.war 'http://3.110.48.199:8080//manager/text/deploy?path=/pipeline_maven'"
           }
         } 
         }
